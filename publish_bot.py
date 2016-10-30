@@ -1,0 +1,31 @@
+import praw
+from config import *
+
+if __name__ == "__main__":
+    content = raw_input("1 - Text\n2 - URL\n\nWhat do you want to post: ")
+    print '\n'
+    title = raw_input("TITLE: ")
+
+    if content == "1":
+        body = raw_input("BODY: ")
+    if content == "2":
+        body = raw_input("URL: ")
+
+    subreddit = raw_input("SUBREDDITS to SUBMIT: ")
+
+    user_agent = "rabot101 automatic publisher. Made by NukeWifeGuy!"
+    r = praw.Reddit(user_agent=user_agent)
+
+    r.login(REDDIT_USER, REDDIT_PASS)
+
+    subreddit = subreddit.split(",")
+
+    for sub in subreddit:
+        if content == "1":
+            r.submit(sub, title, text=body)
+        if content == "2":
+            r.submit(sub, title, url=body)
+
+    print '\n'
+    print ("Thank you, and I hope to see you again, " + REDDIT_USER + " :)")
+    print ("<-----MADE BY NUKEWIFEGUY----->")
