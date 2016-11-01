@@ -13,7 +13,10 @@ if __name__ == "__main__":
 
     subreddit = raw_input("SUBREDDITS to SUBMIT: ")
 
-    user_agent = "rabot101 automatic publisher. Made by NukeWifeGuy!"
+    comment = raw_input("COMMENT: ")
+
+
+    user_agent = 'rabot101 automatic publisher. Made by NukeWifeGuy!'
     r = praw.Reddit(user_agent=user_agent)
 
     r.login(REDDIT_USER, REDDIT_PASS)
@@ -22,9 +25,11 @@ if __name__ == "__main__":
 
     for sub in subreddit:
         if content == "1":
-            r.submit(sub, title, text=body)
+            post = r.submit(sub, title, text=body)
         if content == "2":
-            r.submit(sub, title, url=body)
+            post = r.submit(sub, title, url=body)
+        if comment:
+            post.add_comment (comment)
 
     print '\n'
     print ("Thank you, and I hope to see you again, " + REDDIT_USER + " :)")
